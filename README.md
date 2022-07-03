@@ -1,4 +1,4 @@
-# Leet Code Solutions
+# LeetCode Solutions
 
 These are my LeetCode solutions. 
 
