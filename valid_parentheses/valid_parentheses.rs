@@ -1,21 +1,23 @@
 fn is_valid(s: String) -> bool {
-	let mut last_char: char = '\0';
+    let mut stack: Vec::<char> = Vec::<char>::new();
 
-	for ch in s.chars() {
-		if ch == '{' || ch == '(' || ch == '[' {
-			last_char = ch;
-			continue;
-		}
+    for ch in s.chars() {
+        if ch == '{' || ch == '(' || ch == '[' {
+            stack.push(ch);
+            continue;
+        }
 
-		if (ch == '}' && last_char == '{') || (ch == ']' && last_char == '[') || (ch == ')' && last_char == '(') {
-			last_char = '\0';
-			continue;
-		}
+        if stack.len() > 0 {
+            if (ch == '}' && stack.last().unwrap() == &'{') || (ch == ']' && stack.last().unwrap() == &'[') || (ch == ')' && stack.last().unwrap() == &'(') {
+                stack.pop();
+                continue;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	last_char == '\0'
+    stack.len() == 0
 }
 
 fn main() {
